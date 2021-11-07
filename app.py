@@ -20,14 +20,16 @@ class MainWindow(QMainWindow):
             self.btn_upcoming: None,
             self.btn_overdue: None,
             self.btn_completed: None,
-            'Начальная заставка': None  # Показываем этот group box при запуске приложения.
+            'Начальная заставка': self.gb_screensaver  # Показываем этот group box при запуске приложения.
         }
-        # [group_box.hide() for group_box in list(self.group_boxes.values())]
+        [group_box.hide() for group_box in list(self.group_boxes.values())[:-1]]
         [btn.clicked.connect(self.group_box_show) for btn in list(self.group_boxes.keys())[:-1]]
-        # self.group_boxes['Начальная заставка'].show()
 
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
+        for btn in self.group_boxes.keys():
+            if btn != self.sender():
+                self.group_boxes[btn].hide()
 
 
 if __name__ == '__main__':
