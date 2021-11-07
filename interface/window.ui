@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
+    <width>2700</width>
     <height>720</height>
    </rect>
   </property>
@@ -27,11 +27,16 @@
    <widget class="QGroupBox" name="gb_all_tasks">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>1200</x>
       <y>10</y>
       <width>841</width>
       <height>701</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true"/>
@@ -60,7 +65,7 @@
       <string>Название задачи..</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="set_priority">
+    <widget class="QPushButton" name="btn_set_priority">
      <property name="geometry">
       <rect>
        <x>420</x>
@@ -106,7 +111,7 @@
       <string>Описание..</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="set_tag">
+    <widget class="QPushButton" name="btn_set_tag">
      <property name="geometry">
       <rect>
        <x>380</x>
@@ -152,7 +157,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="add_task">
+    <widget class="QPushButton" name="btn_add_task">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -179,6 +184,196 @@
        <height>24</height>
       </size>
      </property>
+    </widget>
+    <widget class="QTableWidget" name="table_all_tasks">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>821</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Описание</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Метка</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Приоритет</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>821</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="btn_complete_task">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Отметить выполненной</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_task.png</normaloff>../icons/complete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_complete_with_timer">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Выполнить с таймером</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_with_timer.png</normaloff>../icons/complete_with_timer.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_edit_task">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Редактивровать</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/edit_task.png</normaloff>../icons/edit_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_del_task">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Удалить</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/delete_task.png</normaloff>../icons/delete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QComboBox" name="sort_box">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>По дате добавления</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>По приоритету</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/sort.png</normaloff>../icons/sort.png</iconset>
+      </property>
+     </item>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>120</y>
+       <width>160</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6"/>
     </widget>
    </widget>
    <widget class="QGroupBox" name="gb_menu">
@@ -244,28 +439,6 @@
         <property name="icon">
          <iconset>
           <normaloff>../icons/today_tasks.png</normaloff>../icons/today_tasks.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_upcoming">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Предстоящие</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -420,6 +593,651 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="gb_today_tasks">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>841</width>
+      <height>701</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="set_tag_2">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../icons/tag.png</normaloff>../icons/tag.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="task_name_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>441</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Название задачи..</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="add_task_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Добавить задачу</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../icons/add_task.png</normaloff>../icons/add_task.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="set_priority_2">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../icons/prority.png</normaloff>../icons/prority.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>27</width>
+       <height>27</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="task_description_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>441</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Описание..</string>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="task_date_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>51</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>210</y>
+       <width>821</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="btn_complete_task_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Отметить выполненной</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_task.png</normaloff>../icons/complete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_complete_with_timer_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Выполнить с таймером</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_with_timer.png</normaloff>../icons/complete_with_timer.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_edit_task_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Редактивровать</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/edit_task.png</normaloff>../icons/edit_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_del_task_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Удалить</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/delete_task.png</normaloff>../icons/delete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTableWidget" name="table_today_tasks">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>821</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Описание</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Метка</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Приоритет</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QComboBox" name="sort_box_2">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>По дате добавления</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>По приоритету</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/sort.png</normaloff>../icons/sort.png</iconset>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gb_overdue_tasks">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>841</width>
+      <height>701</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QComboBox" name="sort_box_4">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>По дате добавления</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>По приоритету</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/sort.png</normaloff>../icons/sort.png</iconset>
+      </property>
+     </item>
+    </widget>
+    <widget class="QTableWidget" name="table_overdue_tasks">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>821</width>
+       <height>601</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Описание</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Метка</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Приоритет</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>821</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QPushButton" name="btn_complete_task_3">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Отметить выполненной</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_task.png</normaloff>../icons/complete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_complete_with_timer_3">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Перенести на другое время</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/complete_with_timer.png</normaloff>../icons/complete_with_timer.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_del_task_4">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Удалить</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/delete_task.png</normaloff>../icons/delete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="gb_completed_tasks">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>10</y>
+      <width>841</width>
+      <height>701</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QWidget" name="horizontalLayoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>821</width>
+       <height>35</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QPushButton" name="btn_del_task_3">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Удалить задачу из списка выполненных</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/delete_task.png</normaloff>../icons/delete_task.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QTableWidget" name="table_completed_tasks">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>821</width>
+       <height>601</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Описание</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Дата</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Метка</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Приоритет</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QComboBox" name="sort_box_3">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>10</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
+     </property>
+     <item>
+      <property name="text">
+       <string>По дате выполнения</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>По приоритету</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../icons/sort.png</normaloff>../icons/sort.png</iconset>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <zorder>gb_menu</zorder>
+   <zorder>gb_instruments</zorder>
+   <zorder>gb_screensaver</zorder>
+   <zorder>gb_all_tasks</zorder>
+   <zorder>gb_overdue_tasks</zorder>
+   <zorder>gb_completed_tasks</zorder>
+   <zorder>gb_today_tasks</zorder>
   </widget>
  </widget>
  <resources/>

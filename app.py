@@ -16,11 +16,10 @@ class MainWindow(QMainWindow):
 
         self.group_boxes = {
             self.btn_all: self.gb_all_tasks,
-            self.btn_today: None,
-            self.btn_upcoming: None,
-            self.btn_overdue: None,
-            self.btn_completed: None,
-            'Начальная заставка': self.gb_screensaver  # Показываем этот group box при запуске приложения.
+            self.btn_today: self.gb_today_tasks,
+            self.btn_overdue: self.gb_overdue_tasks,
+            self.btn_completed: self.gb_completed_tasks,
+            'Начальная заставка': self.gb_screensaver
         }
         [group_box.hide() for group_box in list(self.group_boxes.values())[:-1]]
         [btn.clicked.connect(self.group_box_show) for btn in list(self.group_boxes.keys())[:-1]]
