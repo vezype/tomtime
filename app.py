@@ -3,18 +3,20 @@
 
 import sys
 
-from PyQt5 import uic  # Импортируем uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt5.QtWidgets import QGroupBox
 
 
-class MyWidget(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        super().__init__()
-        uic.loadUi('window.ui', self)  # Загружаем дизайн
+        super(MainWindow, self).__init__()
+        uic.loadUi('interface/window.ui', self)
+        self.setFixedSize(1080, 720)
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MyWidget()
+    ex = MainWindow()
     ex.show()
     sys.exit(app.exec_())
