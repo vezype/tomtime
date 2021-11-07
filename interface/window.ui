@@ -13,6 +13,16 @@
   <property name="windowTitle">
    <string>Tomtime</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/window_logo.png</normaloff>../icons/window_logo.png</iconset>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>25</width>
+    <height>25</height>
+   </size>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
@@ -69,12 +79,12 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>prority.png</normaloff>prority.png</iconset>
+       <normaloff>../icons/prority.png</normaloff>../icons/prority.png</iconset>
      </property>
      <property name="iconSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>27</width>
+       <height>27</height>
       </size>
      </property>
     </widget>
@@ -115,12 +125,12 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>tag.png</normaloff>tag.png</iconset>
+       <normaloff>../icons/tag.png</normaloff>../icons/tag.png</iconset>
      </property>
      <property name="iconSize">
       <size>
-       <width>17</width>
-       <height>17</height>
+       <width>20</width>
+       <height>20</height>
       </size>
      </property>
     </widget>
@@ -137,6 +147,9 @@
       <font>
        <pointsize>10</pointsize>
       </font>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_3">
@@ -158,12 +171,12 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>icons8-добавить-100.png</normaloff>icons8-добавить-100.png</iconset>
+       <normaloff>../icons/add_task.png</normaloff>../icons/add_task.png</iconset>
      </property>
      <property name="iconSize">
       <size>
-       <width>25</width>
-       <height>25</height>
+       <width>24</width>
+       <height>24</height>
       </size>
      </property>
     </widget>
@@ -205,12 +218,12 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-список-64.png</normaloff>icons8-список-64.png</iconset>
+          <normaloff>../icons/all_tasks.png</normaloff>../icons/all_tasks.png</iconset>
         </property>
         <property name="iconSize">
          <size>
-          <width>23</width>
-          <height>16</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="checkable">
@@ -230,12 +243,12 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-конечная-дата-100.png</normaloff>icons8-конечная-дата-100.png</iconset>
+          <normaloff>../icons/today_tasks.png</normaloff>../icons/today_tasks.png</iconset>
         </property>
         <property name="iconSize">
          <size>
-          <width>18</width>
-          <height>16</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
        </widget>
@@ -252,7 +265,13 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-будущее-время-100.png</normaloff>icons8-будущее-время-100.png</iconset>
+          <normaloff>../icons/upcoming_tasks.png</normaloff>../icons/upcoming_tasks.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -268,7 +287,13 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-облако-оповещение-160.png</normaloff>icons8-облако-оповещение-160.png</iconset>
+          <normaloff>../icons/overdue_tasks.png</normaloff>../icons/overdue_tasks.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -284,7 +309,13 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-двойная-галочка-100.png</normaloff>icons8-двойная-галочка-100.png</iconset>
+          <normaloff>../icons/completed_tasks.png</normaloff>../icons/completed_tasks.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -295,7 +326,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>650</y>
+      <y>290</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -325,7 +356,13 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-закладка-лента-512.png</normaloff>icons8-закладка-лента-512.png</iconset>
+          <normaloff>../icons/my_tags.png</normaloff>../icons/my_tags.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -341,7 +378,13 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons8-таймер-100.png</normaloff>icons8-таймер-100.png</iconset>
+          <normaloff>../icons/timer.png</normaloff>../icons/timer.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
         </property>
        </widget>
       </item>

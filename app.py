@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Автор: Дмитрий Гиль.
 
-import sys
+import sys, time
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
