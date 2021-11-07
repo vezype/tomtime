@@ -24,7 +24,7 @@
    </size>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="gb_all_tasks">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -42,7 +42,7 @@
     <property name="flat">
      <bool>false</bool>
     </property>
-    <widget class="QPlainTextEdit" name="plainTextEdit">
+    <widget class="QPlainTextEdit" name="task_name">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -60,7 +60,7 @@
       <string>Название задачи..</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="set_priority">
      <property name="geometry">
       <rect>
        <x>420</x>
@@ -88,7 +88,7 @@
       </size>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="plainTextEdit_2">
+    <widget class="QPlainTextEdit" name="task_description">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -106,7 +106,7 @@
       <string>Описание..</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="set_tag">
      <property name="geometry">
       <rect>
        <x>380</x>
@@ -134,7 +134,7 @@
       </size>
      </property>
     </widget>
-    <widget class="QDateTimeEdit" name="dateTimeEdit">
+    <widget class="QDateTimeEdit" name="task_date">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -152,7 +152,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="add_task">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -181,7 +181,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="gb_menu">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -322,7 +322,7 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="gb_instruments">
     <property name="geometry">
      <rect>
       <x>10</x>
