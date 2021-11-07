@@ -5,7 +5,6 @@ import sys, time
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
-from PyQt5.QtWidgets import QGroupBox
 
 
 class MainWindow(QMainWindow):
