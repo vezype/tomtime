@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
                 self.table_today_tasks.setItem(e, j, QTableWidgetItem(str(elem)))
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
-        pass
+        del db
 
 
 if __name__ == '__main__':
