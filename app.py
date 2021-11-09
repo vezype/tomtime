@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 # Автор: Дмитрий Гиль.
 
-import sys, time
+import sys
 
-from PyQt5 import uic
+from datetime import datetime
+
+from PyQt5 import uic, QtGui
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 
 
@@ -23,11 +26,17 @@ class MainWindow(QMainWindow):
         [group_box.hide() for group_box in list(self.group_boxes.values())[:-1]]
         [btn.clicked.connect(self.group_box_show) for btn in list(self.group_boxes.keys())[:-1]]
 
+        current_time = datetime.now()
+        self.task_date.setMinimumDate(QDate(current_time.year, current_time.month, current_time.day))
+
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        pass
 
 
 if __name__ == '__main__':
