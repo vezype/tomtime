@@ -1254,7 +1254,7 @@
      </property>
      <item>
       <property name="text">
-       <string>По дате выполнения</string>
+       <string>По дате добавления</string>
       </property>
       <property name="icon">
        <iconset>
