@@ -13,6 +13,34 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 
 
+class TransferTaskForm(QWidget):
+    def __init__(self, task_id: int, date_object: QDate, current_day: str, update_functions):
+        super(TransferTaskForm, self).__init__()
+        uic.loadUi('interface/transfer_task.ui', self)
+        self.setFixedSize(330, 95)
+
+        self.new_time_task.setMinimumDate(date_object)
+        self.update_funcs, self.id, self.current_day = update_functions, task_id, current_day
+
+        self.btn_save.clicked.connect(self.save)
+
+    def save(self) -> None:
+        date, time = self.new_time_task.date(), self.new_time_task.time()
+        date = f'{date.year()}-{date.month()}-{date.day()} {time.hour()}:' \
+               f'{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
+
+        db.update_date_task(self.id, date)
+
+        if self.current_day < date.split()[0]:
+            for update_function in self.update_funcs[:-1]:
+                update_function()
+        else:
+            for update_function in self.update_funcs:
+                update_function()
+
+        self.hide()
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -33,7 +61,8 @@ class MainWindow(QMainWindow):
 
         current_time = datetime.now()
         self.current_day = current_time.strftime('%Y-%m-%d')
-        self.task_date.setMinimumDate(QDate(current_time.year, current_time.month, current_time.day))
+        self.date_object = QDate(current_time.year, current_time.month, current_time.day)
+        self.task_date.setMinimumDate(self.date_object)
 
         self.buttons_and_tables = {
             self.btn_del_task: (self.table_all_tasks, self.update_table_all_tasks),
@@ -52,12 +81,25 @@ class MainWindow(QMainWindow):
 
         self.btn_add_task.clicked.connect(self.add_task)
         self.btn_add_task_2.clicked.connect(self.add_today_task)
+        self.btn_transfer_task.clicked.connect(self.transfer_task)
 
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def transfer_task(self) -> None:
+        selected_items = self.table_overdue_tasks.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            task_id = int(self.table_overdue_tasks.item(item.row(), 0).text())
+
+            self.transfer_task_form = TransferTaskForm(task_id, self.date_object, self.current_day,
+                                                       [self.update_table_all_tasks, self.update_table_overdue_tasks,
+                                                        self.update_table_today_tasks])
+            self.transfer_task_form.show()
 
     def add_task(self) -> None:
         title = self.task_name.toPlainText()

@@ -46,6 +46,13 @@ class SQLRequests:
         self.cursor.execute(request, data)
         self.connection.commit()
 
+    def update_date_task(self, id: int, date: str) -> None:
+        request = f'''UPDATE all_tasks
+                SET date = '{date}'
+                WHERE id = {id}'''
+        self.cursor.execute(request)
+        self.connection.commit()
+
     def get_all_tasks(self, sort_key: str = 'По дате добавления') -> list:
         request = '''
         SELECT 
