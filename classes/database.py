@@ -46,28 +46,48 @@ class SQLRequests:
         self.cursor.execute(request, data)
         self.connection.commit()
 
+    def get_all_tasks(self, sort_key: str = 'По дате добавления') -> list:
+        request = '''
+        SELECT 
+            all_tasks.id, 
+            all_tasks.title, 
+            all_tasks.description,
+            all_tasks.date, 
+            my_tags.title, 
+            priorities.title,
+            all_tasks.priority
+        FROM all_tasks
+        INNER JOIN my_tags ON all_tasks.tag = my_tags.id
+        INNER JOIN priorities ON all_tasks.priority = priorities.id'''
+        tasks = self.cursor.execute(request).fetchall()
+        if sort_key == 'По дате добавления':
+            tasks.sort(key=lambda task: task[3])
+        else:
+            tasks.sort(key=lambda task: task[-1], reverse=True)
+        return [task[:-1] for task in tasks]
+
     def get_today_tasks(self, current_day: str, sort_key: str = 'По дате добавления') -> list:
-        data = self.cursor.execute('SELECT * FROM all_tasks').fetchall()
+        data = self.get_all_tasks(sort_key=sort_key)
         tasks = []
         for task in data:
             if task[3].split()[0] == current_day:
                 tasks.append(task)
-        if sort_key == 'По дате добавления':
-            tasks.sort(key=lambda task: task[3])
-        else:
-            tasks.sort(key=lambda task: task[-1], reverse=True)
-        return tasks
-
-    def get_all_tasks(self, sort_key: str = 'По дате добавления') -> list:
-        tasks = self.cursor.execute('SELECT * FROM all_tasks').fetchall()
-        if sort_key == 'По дате добавления':
-            tasks.sort(key=lambda task: task[3])
-        else:
-            tasks.sort(key=lambda task: task[-1], reverse=True)
         return tasks
 
     def get_completed_tasks(self, sort_key: str = 'По дате добавления') -> list:
-        tasks = self.cursor.execute('SELECT * FROM completed_tasks').fetchall()
+        request = '''
+        SELECT 
+            completed_tasks.id, 
+            completed_tasks.title, 
+            completed_tasks.description,
+            completed_tasks.date, 
+            my_tags.title, 
+            priorities.title,
+            completed_tasks.priority
+        FROM completed_tasks
+        INNER JOIN my_tags ON completed_tasks.tag = my_tags.id
+        INNER JOIN priorities ON completed_tasks.priority = priorities.id'''
+        tasks = self.cursor.execute(request).fetchall()
         if sort_key == 'По дате добавления':
             tasks.sort(key=lambda task: task[3])
         else:
@@ -75,13 +95,15 @@ class SQLRequests:
         return tasks
 
     def get_overdue_tasks(self, current_day: str, sort_key: str = 'По дате добавления') -> list:
-        data = self.cursor.execute('SELECT * FROM all_tasks').fetchall()
+        data = self.get_all_tasks(sort_key=sort_key)
         tasks = []
         for task in data:
             if task[3].split()[0] < current_day:
                 tasks.append(task)
-        if sort_key == 'По дате добавления':
-            tasks.sort(key=lambda task: task[3])
-        else:
-            tasks.sort(key=lambda task: task[-1], reverse=True)
         return tasks
+
+    def get_priority_id(self, title: str) -> int:
+        return self.cursor.execute(f'SELECT id FROM priorities WHERE title = "{title}"').fetchone()[0]
+
+    def get_tag_id(self, title: str) -> int:
+        return self.cursor.execute(f'SELECT id FROM my_tags WHERE title = "{title}"').fetchone()[0]

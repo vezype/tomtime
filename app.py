@@ -50,11 +50,40 @@ class MainWindow(QMainWindow):
         for btn in list(self.buttons_and_tables.keys())[4:]:
             btn.clicked.connect(self.complete_task)
 
+        self.btn_add_task.clicked.connect(self.add_task)
+        self.btn_add_task_2.clicked.connect(self.add_today_task)
+
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def add_task(self) -> None:
+        title = self.task_name.toPlainText()
+        description = self.task_description.toPlainText()
+        date, time = self.task_date.date(), self.task_date.time()
+        date = f'{date.year()}-{date.month()}-{date.day()} {time.hour()}:' \
+               f'{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
+        priority = db.get_priority_id(self.set_priority.currentText())
+        tag = db.get_tag_id(self.set_tag.currentText())
+        if title and description:
+            db.add_task(title, description, date, tag, priority)
+            self.update_table_all_tasks()
+            if self.current_day == date.split()[0]:
+                self.update_table_today_tasks()
+
+    def add_today_task(self) -> None:
+        title = self.task_name_2.toPlainText()
+        description = self.task_description_2.toPlainText()
+        time = self.task_date_2.time()
+        date = f'{self.current_day} {time.hour()}:{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
+        priority = db.get_priority_id(self.set_priority_2.currentText())
+        tag = db.get_tag_id(self.set_tag_2.currentText())
+        if title and description:
+            db.add_task(title, description, date, tag, priority)
+            self.update_table_all_tasks()
+            self.update_table_today_tasks()
 
     def del_task(self) -> None:
         table, update_func = self.buttons_and_tables[self.sender()]
