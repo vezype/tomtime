@@ -334,7 +334,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Очень важно</string>
+       <string>Как-нибудь потом</string>
       </property>
       <property name="icon">
        <iconset>
@@ -352,7 +352,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Как-нибудь потом</string>
+       <string>Очень важно</string>
       </property>
       <property name="icon">
        <iconset>
@@ -939,7 +939,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Очень важно</string>
+       <string>Как-нибудь потом</string>
       </property>
       <property name="icon">
        <iconset>
@@ -957,7 +957,7 @@
      </item>
      <item>
       <property name="text">
-       <string>Как-нибудь потом</string>
+       <string>Очень важно</string>
       </property>
       <property name="icon">
        <iconset>

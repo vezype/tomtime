@@ -26,18 +26,59 @@ class MainWindow(QMainWindow):
             self.btn_completed: self.gb_completed_tasks,
             'Начальная заставка': self.gb_screensaver
         }
-        [group_box.hide() for group_box in list(self.group_boxes.values())[:-1]]
-        [btn.clicked.connect(self.group_box_show) for btn in list(self.group_boxes.keys())[:-1]]
+        for group_box in list(self.group_boxes.values())[:-1]:
+            group_box.hide()
+        for btn in list(self.group_boxes.keys())[:-1]:
+            btn.clicked.connect(self.group_box_show)
 
         current_time = datetime.now()
         self.current_day = current_time.strftime('%Y-%m-%d')
         self.task_date.setMinimumDate(QDate(current_time.year, current_time.month, current_time.day))
+
+        self.buttons_and_tables = {
+            self.btn_del_task: (self.table_all_tasks, self.update_table_all_tasks),
+            self.btn_del_task_2: (self.table_today_tasks, self.update_table_today_tasks),
+            self.btn_del_task_3: (self.table_completed_tasks, self.update_table_completed_tasks),
+            self.btn_del_task_4: (self.table_overdue_tasks, self.update_table_overdue_tasks),
+            self.btn_complete_task: (self.table_all_tasks, self.update_table_all_tasks),
+            self.btn_complete_task_2: (self.table_today_tasks, self.update_table_today_tasks),
+            self.btn_complete_task_3: (self.table_overdue_tasks, self.update_table_overdue_tasks)
+        }
+        for btn, update_func in list(self.buttons_and_tables.items())[:4]:
+            btn.clicked.connect(self.del_task)
+            update_func[-1]()
+        for btn in list(self.buttons_and_tables.keys())[4:]:
+            btn.clicked.connect(self.complete_task)
 
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def del_task(self) -> None:
+        table, update_func = self.buttons_and_tables[self.sender()]
+        selected_items = table.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            task_id = int(table.item(item.row(), 0).text())
+            if table == self.table_completed_tasks:
+                db.del_completed_task(task_id)
+            else:
+                db.del_task(task_id)
+            update_func()
+
+    def complete_task(self) -> None:
+        table, update_func = self.buttons_and_tables[self.sender()]
+        selected_items = table.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            task_id = int(table.item(item.row(), 0).text())
+            db.mark_task_completed(task_id)
+            update_func()
+            self.update_table_completed_tasks()
 
     def update_table_all_tasks(self) -> None:
         self.table_all_tasks.setRowCount(0)
@@ -76,7 +117,7 @@ class MainWindow(QMainWindow):
                 self.table_today_tasks.setItem(e, j, QTableWidgetItem(str(elem)))
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
-        del db
+        db.connection.close()
 
 
 if __name__ == '__main__':

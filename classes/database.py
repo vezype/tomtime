@@ -6,9 +6,6 @@ class SQLRequests:
         self.connection = sqlite3.connect(way_to_database)
         self.cursor = self.connection.cursor()
 
-    def __del__(self):
-        self.connection.close()
-
     def del_task(self, task_id: int) -> None:
         self.cursor.execute(f'DELETE FROM all_tasks WHERE id = {task_id}')
         self.connection.commit()
