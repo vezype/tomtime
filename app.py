@@ -8,13 +8,13 @@ from datetime import datetime
 from loader import db, ntf
 
 from PyQt5 import uic, QtGui
-from PyQt5.QtCore import QDate
+from PyQt5.QtCore import QDate, QTime
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 
 
 class TransferTaskForm(QWidget):
-    def __init__(self, task_id: int, date_object: QDate, current_day: str, update_functions):
+    def __init__(self, task_id: int, date_object: QDate, current_day: str, update_functions: list):
         super(TransferTaskForm, self).__init__()
         uic.loadUi('interface/transfer_task.ui', self)
         self.setFixedSize(330, 95)
@@ -39,6 +39,90 @@ class TransferTaskForm(QWidget):
                 update_function()
 
         self.hide()
+
+
+class EditTaskForm(QWidget):
+    def __init__(self, task_id: int, update_functions: list):
+        super(EditTaskForm, self).__init__()
+        uic.loadUi('interface/edit_task.ui', self)
+        self.setFixedSize(460, 185)
+
+        self.update_functions = update_functions
+        self.task_id = task_id
+        self.title, self.description, self.date, self.tag_id, self.priority_id = db.get_task(self.task_id)
+        self.tag, self.priority = db.get_tag_title(self.tag_id), db.get_priority_title(self.priority_id)
+
+        self.task_name.setPlainText(self.title)
+        self.task_description.setPlainText(self.description)
+        year, month, day = self.date.split()[0].split('-')
+        hour, minute = self.date.split()[-1].split(':')
+        time_object = QTime(int(hour), int(minute))
+        date_object = QDate(int(year), int(month), int(day))
+        self.task_date.setDate(date_object)
+        self.task_date.setTime(time_object)
+        self.set_tag.addItems(db.get_title_tags())
+        self.set_priority.setCurrentText(self.priority)
+        self.set_tag.setCurrentText(self.tag)
+
+        self.btn_save.clicked.connect(self.save)
+
+    def save(self) -> None:
+        if self.task_name.toPlainText():
+            tag_id = db.get_tag_id(self.set_tag.currentText())
+            priority_id = db.get_priority_id(self.set_priority.currentText())
+            date, time = self.task_date.date(), self.task_date.time()
+            date = f'{date.year()}-{date.month()}-{date.day()} {time.hour()}:' \
+                   f'{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
+
+            db.update_task(self.task_id, self.task_name.toPlainText(), self.task_description.toPlainText(),
+                           date, tag_id, priority_id)
+
+            for update_function in self.update_functions:
+                update_function()
+
+            self.hide()
+
+
+class EditTodayTaskForm(QWidget):
+    def __init__(self, task_id: int, update_functions: list):
+        super(EditTodayTaskForm, self).__init__()
+        uic.loadUi('interface/edit_task_today.ui', self)
+        self.setFixedSize(460, 185)
+
+        self.update_functions = update_functions
+        self.task_id = task_id
+        self.title, self.description, self.date, self.tag_id, self.priority_id = db.get_task(self.task_id)
+        self.tag, self.priority = db.get_tag_title(self.tag_id), db.get_priority_title(self.priority_id)
+
+        self.task_name.setPlainText(self.title)
+        self.task_description.setPlainText(self.description)
+        year, month, day = self.date.split()[0].split('-')
+        hour, minute = self.date.split()[-1].split(':')
+        time_object = QTime(int(hour), int(minute))
+        date_object = QDate(int(year), int(month), int(day))
+        self.task_date_2.setDate(date_object)
+        self.task_date_2.setTime(time_object)
+        self.set_tag.addItems(db.get_title_tags())
+        self.set_priority.setCurrentText(self.priority)
+        self.set_tag.setCurrentText(self.tag)
+
+        self.btn_save.clicked.connect(self.save)
+
+    def save(self) -> None:
+        if self.task_name.toPlainText():
+            tag_id = db.get_tag_id(self.set_tag.currentText())
+            priority_id = db.get_priority_id(self.set_priority.currentText())
+            date, time = self.task_date_2.date(), self.task_date_2.time()
+            date = f'{date.year()}-{date.month()}-{date.day()} {time.hour()}:' \
+                   f'{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
+
+            db.update_task(self.task_id, self.task_name.toPlainText(), self.task_description.toPlainText(),
+                           date, tag_id, priority_id)
+
+            for update_function in self.update_functions:
+                update_function()
+
+            self.hide()
 
 
 class MainWindow(QMainWindow):
@@ -82,12 +166,35 @@ class MainWindow(QMainWindow):
         self.btn_add_task.clicked.connect(self.add_task)
         self.btn_add_task_2.clicked.connect(self.add_today_task)
         self.btn_transfer_task.clicked.connect(self.transfer_task)
+        self.btn_edit_task.clicked.connect(self.edit_task)
+        self.btn_edit_task_2.clicked.connect(self.edit_today_task)
 
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def edit_task(self) -> None:
+        selected_items = self.table_all_tasks.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            task_id = int(self.table_all_tasks.item(item.row(), 0).text())
+
+            self.edit_task_form = EditTaskForm(task_id, [self.update_table_all_tasks, self.update_table_today_tasks])
+            self.edit_task_form.show()
+
+    def edit_today_task(self) -> None:
+        selected_items = self.table_today_tasks.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            task_id = int(self.table_today_tasks.item(item.row(), 0).text())
+
+            self.edit_task_today_form = EditTodayTaskForm(task_id,
+                                                          [self.update_table_all_tasks, self.update_table_today_tasks])
+            self.edit_task_today_form.show()
 
     def transfer_task(self) -> None:
         selected_items = self.table_overdue_tasks.selectedItems()
@@ -109,7 +216,7 @@ class MainWindow(QMainWindow):
                f'{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
         priority = db.get_priority_id(self.set_priority.currentText())
         tag = db.get_tag_id(self.set_tag.currentText())
-        if title and description:
+        if title:
             db.add_task(title, description, date, tag, priority)
             self.update_table_all_tasks()
             if self.current_day == date.split()[0]:
@@ -122,7 +229,7 @@ class MainWindow(QMainWindow):
         date = f'{self.current_day} {time.hour()}:{"0" + str(time.minute()) if time.minute() < 10 else time.minute()}'
         priority = db.get_priority_id(self.set_priority_2.currentText())
         tag = db.get_tag_id(self.set_tag_2.currentText())
-        if title and description:
+        if title:
             db.add_task(title, description, date, tag, priority)
             self.update_table_all_tasks()
             self.update_table_today_tasks()

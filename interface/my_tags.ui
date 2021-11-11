@@ -18,6 +18,10 @@
   <property name="windowTitle">
    <string>Мои метки</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../additional_content/images/window_logo.png</normaloff>../additional_content/images/window_logo.png</iconset>
+  </property>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>

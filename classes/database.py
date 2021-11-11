@@ -114,3 +114,16 @@ class SQLRequests:
 
     def get_tag_id(self, title: str) -> int:
         return self.cursor.execute(f'SELECT id FROM my_tags WHERE title = "{title}"').fetchone()[0]
+
+    def get_priority_title(self, id: int) -> str:
+        return self.cursor.execute(f'SELECT title FROM priorities WHERE id = {id}').fetchone()[0]
+
+    def get_tag_title(self, id: int) -> str:
+        return self.cursor.execute(f'SELECT title FROM my_tags WHERE id = {id}').fetchone()[0]
+
+    def get_title_tags(self) -> list:
+        return list(self.cursor.execute('SELECT title FROM my_tags'))[1:]
+
+    def get_task(self, id: int) -> list:
+        return list(self.cursor.execute('SELECT title, description, date, tag, priority FROM all_tasks WHERE id = ?',
+                                        (id,)).fetchone())

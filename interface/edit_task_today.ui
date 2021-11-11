@@ -6,13 +6,183 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>460</width>
+    <height>185</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Редактирование задачи</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../additional_content/images/window_logo.png</normaloff>../additional_content/images/window_logo.png</iconset>
+  </property>
+  <widget class="QPlainTextEdit" name="task_description">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>441</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Описание..</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="set_tag">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>140</y>
+     <width>111</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+   <item>
+    <property name="text">
+     <string>Без метки</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons/other/tag.png</normaloff>../icons/other/tag.png</iconset>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="btn_save">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>140</y>
+     <width>181</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../icons/instruments/save.png</normaloff>../icons/instruments/save.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>18</width>
+     <height>18</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="set_priority">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>110</y>
+     <width>141</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+   <item>
+    <property name="text">
+     <string>Без приоритета</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons/numbers/number_zero.png</normaloff>../icons/numbers/number_zero.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Как-нибудь потом</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons/numbers/number_one.png</normaloff>../icons/numbers/number_one.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Скоро сделаю</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons/numbers/number_two.png</normaloff>../icons/numbers/number_two.png</iconset>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Очень важно</string>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../icons/numbers/number_three.png</normaloff>../icons/numbers/number_three.png</iconset>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPlainTextEdit" name="task_name">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>441</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string>Название задачи..</string>
+   </property>
+  </widget>
+  <widget class="QTimeEdit" name="task_date_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>71</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
