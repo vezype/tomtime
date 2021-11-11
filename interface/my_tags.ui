@@ -22,13 +22,13 @@
    <iconset>
     <normaloff>../additional_content/images/window_logo.png</normaloff>../additional_content/images/window_logo.png</iconset>
   </property>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="table_my_tags">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>61</y>
+     <y>51</y>
      <width>461</width>
-     <height>281</height>
+     <height>291</height>
     </rect>
    </property>
    <column>
@@ -39,11 +39,6 @@
    <column>
     <property name="text">
      <string>Название</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>Цвет</string>
     </property>
    </column>
   </widget>
@@ -82,23 +77,6 @@
       <property name="icon">
        <iconset>
         <normaloff>../icons/instruments/delete_task.png</normaloff>../icons/instruments/delete_task.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_edit_tag">
-      <property name="text">
-       <string>Редактировать</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../icons/instruments/edit_task.png</normaloff>../icons/instruments/edit_task.png</iconset>
       </property>
       <property name="iconSize">
        <size>

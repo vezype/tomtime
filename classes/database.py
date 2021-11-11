@@ -16,11 +16,12 @@ class SQLRequests:
 
     def del_tag(self, tag_id: int) -> None:
         self.cursor.execute(f'DELETE FROM my_tags WHERE id = {tag_id}')
+        self.cursor.execute(f'UPDATE all_tasks SET tag = 0 WHERE tag = {tag_id}')
         self.connection.commit()
 
-    def add_tag(self, title: str, color: str) -> None:
-        request = 'INSERT INTO my_tags(title, color) VALUES (?, ?)'
-        data = (title, color)
+    def add_tag(self, title: str) -> None:
+        request = 'INSERT INTO my_tags(title) VALUES (?)'
+        data = (title,)
         self.cursor.execute(request, data)
         self.connection.commit()
 
@@ -122,8 +123,11 @@ class SQLRequests:
         return self.cursor.execute(f'SELECT title FROM my_tags WHERE id = {id}').fetchone()[0]
 
     def get_title_tags(self) -> list:
-        return list(self.cursor.execute('SELECT title FROM my_tags'))[1:]
+        return [tag[0] for tag in self.cursor.execute('SELECT title FROM my_tags').fetchall()[1:]]
 
     def get_task(self, id: int) -> list:
         return list(self.cursor.execute('SELECT title, description, date, tag, priority FROM all_tasks WHERE id = ?',
                                         (id,)).fetchone())
+
+    def get_tags(self) -> list:
+        return self.cursor.execute('SELECT * FROM my_tags').fetchall()[1:]

@@ -125,6 +125,66 @@ class EditTodayTaskForm(QWidget):
             self.hide()
 
 
+class AddTagForm(QWidget):
+    def __init__(self, update_functions: list, update_table_function):
+        super(AddTagForm, self).__init__()
+        uic.loadUi('interface/add_tag.ui', self)
+        self.setFixedSize(400, 83)
+
+        self.update_functions = update_functions
+        self.update_table = update_table_function
+
+        self.btn_add_tag.clicked.connect(self.add)
+
+    def add(self) -> None:
+        title = self.title_tag.text()
+
+        if title:
+            db.add_tag(title)
+            self.update_table()
+
+            for update_function in self.update_functions:
+                update_function()
+
+            self.hide()
+
+
+class MyTagsForm(QWidget):
+    def __init__(self, update_functions: list):
+        super(MyTagsForm, self).__init__()
+        uic.loadUi('interface/my_tags.ui', self)
+        self.setFixedSize(481, 354)
+
+        self.update_table()
+        self.update_functions = update_functions
+
+        self.btn_del_tag.clicked.connect(self.del_tag)
+        self.btn_add_tag.clicked.connect(self.add_tag)
+
+    def del_tag(self) -> None:
+        selected_items = self.table_my_tags.selectedItems()
+
+        if selected_items:
+            item = selected_items[0]
+            tag_id = int(self.table_my_tags.item(item.row(), 0).text())
+            db.del_tag(tag_id)
+        self.update_table()
+
+        for update_function in self.update_functions:
+            update_function()
+
+    def add_tag(self):
+        self.add_tag_form = AddTagForm(self.update_functions, self.update_table)
+        self.add_tag_form.show()
+
+    def update_table(self) -> None:
+        self.table_my_tags.setRowCount(0)
+        for e, tag in enumerate(db.get_tags()):
+            self.table_my_tags.setRowCount(self.table_my_tags.rowCount() + 1)
+            for j, elem in enumerate(tag):
+                self.table_my_tags.setItem(e, j, QTableWidgetItem(str(elem)))
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -163,17 +223,24 @@ class MainWindow(QMainWindow):
         for btn in list(self.buttons_and_tables.keys())[4:]:
             btn.clicked.connect(self.complete_task)
 
+        self.update_comboboxes()
+
         self.btn_add_task.clicked.connect(self.add_task)
         self.btn_add_task_2.clicked.connect(self.add_today_task)
         self.btn_transfer_task.clicked.connect(self.transfer_task)
         self.btn_edit_task.clicked.connect(self.edit_task)
         self.btn_edit_task_2.clicked.connect(self.edit_today_task)
+        self.btn_my_tags.clicked.connect(self.my_tags)
 
     def group_box_show(self) -> None:
         self.group_boxes[self.sender()].show()
         for btn in self.group_boxes.keys():
             if btn != self.sender():
                 self.group_boxes[btn].hide()
+
+    def my_tags(self) -> None:
+        self.my_tags_form = MyTagsForm([self.update_comboboxes, self.update_table_all_tasks])
+        self.my_tags_form.show()
 
     def edit_task(self) -> None:
         selected_items = self.table_all_tasks.selectedItems()
@@ -293,6 +360,10 @@ class MainWindow(QMainWindow):
             self.table_today_tasks.setRowCount(self.table_today_tasks.rowCount() + 1)
             for j, elem in enumerate(row):
                 self.table_today_tasks.setItem(e, j, QTableWidgetItem(str(elem)))
+
+    def update_comboboxes(self) -> None:
+        self.set_tag.addItems(db.get_title_tags())
+        self.set_tag_2.addItems(db.get_title_tags())
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         db.connection.close()
