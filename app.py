@@ -223,6 +223,8 @@ class MainWindow(QMainWindow):
         for btn in list(self.buttons_and_tables.keys())[4:]:
             btn.clicked.connect(self.complete_task)
 
+        ntf.notify(self.table_today_tasks.rowCount(), self.table_overdue_tasks.rowCount())
+
         self.update_comboboxes()
 
         self.btn_add_task.clicked.connect(self.add_task)
